@@ -59,7 +59,7 @@ public class AppUserServiceImpl implements UserDetailsService, GeneralService<Ap
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setConfirmPassword(user.getConfirmPassword());
         newUser.setOldPassword(user.getConfirmPassword());
-        newUser.setPhoneNumber(user.getPhoneNumber());
+//        newUser.setPhoneNumber(user.getPhoneNumber());
         return appUserRepo.save(newUser);
     }
 
