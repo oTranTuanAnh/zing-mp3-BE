@@ -14,11 +14,9 @@ public class Comment {
     private Long id;
     @CreationTimestamp
     private Date createDate;
-    private String content;
+    private String textCom;
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private AppUser user;
     @ManyToOne
-    @JoinColumn(name = "song_id")
     private Song song;
 }
