@@ -29,6 +29,14 @@ public class SongController {
         return new ResponseEntity<>(songService.save(song),HttpStatus.CREATED);
     }
 
+    @PutMapping("/count/{id}")
+    public ResponseEntity<?> countListen(@PathVariable Long id) {
+        Optional<Song> songOptional = songService.findById(id);
+        Song song = songOptional.get();
+        song.setListenCount(song.getListenCount() + 1);
+        return new ResponseEntity<>(songService.save(song),HttpStatus.OK);
+    }
+
     @PutMapping("/user/update")
     public ResponseEntity<?> update(@RequestBody Song song) {
         return new ResponseEntity<>(songService.save(song),HttpStatus.OK);
@@ -62,5 +70,14 @@ public class SongController {
     @GetMapping("newSongsList")
     public ResponseEntity<Iterable<Song>> newSongsList() {
         return new ResponseEntity<>(songService.getNewSongsList(),HttpStatus.OK);
+    }
+
+    @GetMapping("hotSongsList")
+    public ResponseEntity<Iterable<Song>> hotSongsList() {
+        return new ResponseEntity<>(songService.getHotSongsList(),HttpStatus.OK);
+    }
+    @GetMapping("favoriteSongs")
+    public ResponseEntity<Iterable<Song>> favoriteSongs() {
+        return new ResponseEntity<>(songService.getFavoriteSongs(),HttpStatus.OK);
     }
 }

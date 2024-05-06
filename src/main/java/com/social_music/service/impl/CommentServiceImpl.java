@@ -1,5 +1,7 @@
 package com.social_music.service.impl;
 
+import com.social_music.model.Comment;
+import com.social_music.repository.CommentRepository;
 import com.social_music.model.AppUser;
 import com.social_music.model.Comment;
 import com.social_music.model.Likes;
@@ -20,7 +22,6 @@ public class CommentServiceImpl implements ICommentService {
     private SongRepo songRepository;
     @Autowired
     private AppUserRepository userRepository;
-
     @Override
     public Iterable<Comment> findAll() {
         return commentRepository.findAll();

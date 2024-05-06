@@ -1,6 +1,7 @@
 package com.social_music.service.impl;
 
 import com.social_music.model.Song;
+import com.social_music.repository.LikeRepository;
 import com.social_music.repository.SongRepo;
 import com.social_music.service.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import java.util.Optional;
 public class SongServiceImpl implements ISongService {
     @Autowired
     private SongRepo songRepo;
+
+    @Autowired
+    private LikeRepository likeRepository;
 
     @Override
     public Iterable<Song> findAll() {
@@ -26,6 +30,7 @@ public class SongServiceImpl implements ISongService {
 
     @Override
     public void remove(Long id) {
+        likeRepository.deleteBySongId(id);
         songRepo.deleteById(id);
     }
 
@@ -54,4 +59,13 @@ public class SongServiceImpl implements ISongService {
         return songRepo.findAllByOrderByDateDesc();
     }
 
+    @Override
+    public Iterable<Song> getHotSongsList() {
+        return songRepo.findAllByOrderByListenCountDesc();
+    }
+
+    @Override
+    public Iterable<Song> getFavoriteSongs() {
+        return songRepo.findAllByOrderByCountLikeDesc();
+    }
 }
