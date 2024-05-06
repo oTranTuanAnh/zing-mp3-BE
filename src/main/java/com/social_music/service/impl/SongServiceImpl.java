@@ -33,4 +33,25 @@ public class SongServiceImpl implements ISongService {
     public Iterable<Song> getSongByUserId(Long userId) {
         return songRepo.findSongByAppUserId(userId);
     }
+
+    @Override
+    public Iterable<Song> getSongByTitle(String title) {
+        return songRepo.findSongByTitleContaining(title);
+    }
+
+    @Override
+    public Iterable<Song> getSongByAuthor(String authorName) {
+        return songRepo.findSongByAuthorContaining(authorName);
+    }
+
+    @Override
+    public Iterable<Song> getSongBySinger(String singer) {
+        return songRepo.findSongBySingerContaining(singer);
+    }
+
+    @Override
+    public Iterable<Song> getNewSongsList() {
+        return songRepo.findAllByOrderByDateDesc();
+    }
+
 }

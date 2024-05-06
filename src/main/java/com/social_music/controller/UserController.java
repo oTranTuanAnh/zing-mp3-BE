@@ -79,6 +79,7 @@ public class UserController {
         newUser.setConfirmPassword(appUser.getConfirmPassword());
         newUser.setOldPassword(appUser.getPassword());
         userService.save(newUser);
+        System.out.println("OK!");
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
     @PutMapping("/users/update/infor/{id}")

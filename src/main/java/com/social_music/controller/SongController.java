@@ -1,6 +1,7 @@
 package com.social_music.controller;
 
 import com.social_music.model.Song;
+import com.social_music.service.impl.LikeService;
 import com.social_music.service.impl.SongServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class SongController {
     @Autowired
     private SongServiceImpl songService;
+
     @GetMapping()
     public ResponseEntity<Iterable<Song>> findAll() {
         return new ResponseEntity<>(songService.findAll(), HttpStatus.OK);
@@ -41,5 +43,24 @@ public class SongController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         songService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("findSongByTitle/{title}")
+    public ResponseEntity<Iterable<Song>> findSongByTitle(@PathVariable String title) {
+        return new ResponseEntity<>(songService.getSongByTitle(title), HttpStatus.OK);
+    }
+
+    @GetMapping("findSongByAuthor/{author}")
+    public ResponseEntity<Iterable<Song>> findSongByAuthor(@PathVariable String author) {
+        return new ResponseEntity<>(songService.getSongByAuthor(author), HttpStatus.OK);
+    }
+
+    @GetMapping("findSongBySinger/{singer}")
+    public ResponseEntity<Iterable<Song>> findSongBySinger(@PathVariable String singer) {
+        return new ResponseEntity<>(songService.getSongBySinger(singer), HttpStatus.OK);
+    }
+    @GetMapping("newSongsList")
+    public ResponseEntity<Iterable<Song>> newSongsList() {
+        return new ResponseEntity<>(songService.getNewSongsList(),HttpStatus.OK);
     }
 }
