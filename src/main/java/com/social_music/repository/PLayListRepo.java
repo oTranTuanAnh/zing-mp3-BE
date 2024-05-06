@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PLayListRepo extends CrudRepository<PlayList, Long> {
+    Iterable<PlayList> findByAppUserId(Long appUserId);
 }

@@ -32,4 +32,9 @@ public class PlayListServiceImpl implements IPlayListService {
     public void remove(Long id) {
         playListRepo.deleteById(id);
     }
+
+    @Override
+    public Iterable<PlayList> getAllByUserId(Long userId) {
+        return playListRepo.findByAppUserId(userId);
+    }
 }
